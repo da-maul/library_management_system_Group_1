@@ -14,25 +14,16 @@ void main() {
             "9780062316097", 3);
 
 
-    library.addBook(book1);
-    library.addBook(book2);
-    library.addBook(book3);
+    library.addBook(book1); library.addBook(book2); library.addBook(book3);
 
     Member joe = new Member("Joe Mama", 1337);
     Member hugh = new Member("Hugh Janus", 6969);
     Member ben = new Member("Ben Dover", 8008);
 
-    library.addMember(joe);
-    library.addMember(hugh);
-    library.addMember(ben);
+    library.addMember(joe); library.addMember(hugh); library.addMember(ben);
 
-//    IO.println(library.getMember(1337));
+    ConsoleUI console = new ConsoleUI(library);
 
-//    library.printBooks();
-//    library.printMembers();
-
-
-ConsoleUI console = new ConsoleUI(library);
-console.run();
+    console.run();
 
 }

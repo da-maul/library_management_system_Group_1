@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ConsoleUI {
 
     private final Library library;
@@ -23,16 +25,21 @@ public class ConsoleUI {
 
     public void showLoans(){
         int memberID = Integer.parseInt(IO.readln("Please input your member ID:"));
-        IO.println(library.getLoansByMemberID(memberID));
+        if (library.getLoansByMemberID(memberID).equals(new ArrayList<>())){
+            IO.println("You have no active loans!");
+        }
+        else {
+            IO.println(library.getLoansByMemberID(memberID));
+        }
     }
 
     public void returnBook(){
         int bookID = Integer.parseInt(IO.readln("Please input the ID of the book to be returned:"));
-        String salutation = "";
+        String returnerName = "";
         if (library.getLoan(bookID) != null){
-        salutation = library.getLoan(bookID).getBorrower().name();}
+        returnerName = library.getLoan(bookID).getBorrower().name();}
         if (library.returnBook(bookID)){
-            IO.println(String.format("Thank you %s! %s was successfully returned!", salutation,library.getBook(bookID).title()));
+            IO.println(String.format("Thank you %s! %s was successfully returned!", returnerName,library.getBook(bookID).title()));
         }
         else {IO.println("Sorry, that book is not loaned out, or there was some other error...");}
     }
