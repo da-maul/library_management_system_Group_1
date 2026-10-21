@@ -7,13 +7,13 @@ public class Library {
     private final ArrayList<Loan> loans = new ArrayList<>();
 
     //TODO make enum
-    public boolean loanIt(int resourceID, int memberID){
-        if (!resources.contains(getResource(resourceID))) return false;
-        if (!members.contains(getMember(memberID))){return false;}
+    public LoanError loanIt(int resourceID, int memberID){
+        if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
+        if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
         Loan newLoan = new Loan(getResource(resourceID),getMember(memberID),LocalDate.now());
-        if (loans.contains(newLoan)){return false;}
+        if (loans.contains(newLoan)){return LoanError.LOANED_OUT;}
         loans.add(newLoan);
-        return true;
+        return LoanError.SUCCESS;
     }
 
     public boolean returnIt(int resourceID){
