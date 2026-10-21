@@ -43,6 +43,11 @@ public class Library {
     //setters
     public void addResource(Resource resource){resources.add(resource);}
     public void addMember(Member member){members.add(member);}
+    public void addBook(Book book){resources.add(book);}
+    public void addMovie(Movie movie){resources.add(movie);}
+    public void addAudiobook(AudioBook audioBook){resources.add(audioBook);}
+    public void addVideoGame(VideoGame videoGame){resources.add(videoGame);}
+
     //getters
     public ArrayList<Resource> getResources(){return resources;}
     public ArrayList<Member> getMembers() {return members;}
@@ -50,6 +55,7 @@ public class Library {
 
     public Resource getResource(int resourceID){
         for (Resource resource : resources){
+            //TODO this is comparing two wrong values
             if (resource.getIdentifier() == resourceID){
                 return resource;
             }

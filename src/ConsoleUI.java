@@ -48,12 +48,13 @@ public class ConsoleUI {
         int resourceID = Integer.parseInt(IO.readln("Input the ID of the media to be borrowed:"));
         int memberID = Integer.parseInt(IO.readln("Input the Membership ID:"));
         //TODO fix this shit and make it a switch statement that uses the enums from loanIt
-        switch (library.loanIt(resourceID,memberID));
-
-            IO.println(String.format("Thank you for loaning %s, %s!",
-                    library.getResource(resourceID).getTitle(), library.getMember(memberID).name()));
+        switch (library.loanIt(resourceID,memberID)){
+            case SUCCESS -> {IO.println(String.format("Thank you for loaning %s, %s!",
+                    library.getResource(resourceID).getTitle(), library.getMember(memberID).name()));}
+            case LOANED_OUT -> {IO.println("Sorry, that media is currently loaned out...");}
+            case RESOURCE_NOT_FOUND -> {IO.println("Sorry, we were unable to find that media...");}
+            case MEMBER_NOT_FOUND -> {IO.println("Incorrect or Missing Member ID");}
         }
-        else {IO.println("Sorry, there was an error, or that media is not available...");}
     }
 
     public void showMenu(){

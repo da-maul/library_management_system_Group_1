@@ -14,7 +14,10 @@ void main() {
             9780062316097L, 464);
 
 
-    library.addBook(book1); library.addBook(book2); library.addBook(book3);
+    library.addResource(book1); library.addResource(book2); library.addResource(book3);
+    IO.println(book1);
+    IO.println(library.getResources());
+    IO.println(library.getResource(1));
 
     Member joe = new Member("Joe Mama", 1337);
     Member hugh = new Member("Hugh Janus", 6969);
