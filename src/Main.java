@@ -5,19 +5,16 @@ void main() {
 
     Book book1 = new Book("Allan B. Downey",
             "Think Java",
-            9781492072508L, 324);
+            9781492072508L, 324,1);
     Book book2 = new Book("Rachel Cusk",
             "Omrids",
-            9788763851664L, 240);
+            9788763851664L, 240,2);
     Book book3 = new Book("Yuval Noah Harari",
             "Sapiens",
-            9780062316097L, 464);
+            9780062316097L, 464,3);
 
 
     library.addResource(book1); library.addResource(book2); library.addResource(book3);
-    IO.println(book1);
-    IO.println(library.getResources());
-    IO.println(library.getResource(1));
 
     Member joe = new Member("Joe Mama", 1337);
     Member hugh = new Member("Hugh Janus", 6969);

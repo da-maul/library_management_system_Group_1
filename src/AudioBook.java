@@ -1,11 +1,13 @@
 public class AudioBook extends Resource {
     private final String author;
     private final int lengthInMinutes;
+    private final long ISBN;
 
-    public AudioBook(String author, String title, long ISBN, int lengthInMinutes) {
-        super(author, title, ISBN);
+    public AudioBook(String author, String title, int lengthInMinutes,long ISBN,long identifier) {
+        super(author, title,identifier);
         this.author = author;
         this.lengthInMinutes = lengthInMinutes;
+        this.ISBN = ISBN;
     }
 
     public String getAuthor() {return author;}
