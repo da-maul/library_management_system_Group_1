@@ -17,7 +17,7 @@ public class Library {
 
     public boolean returnBook(int bookID){
         for (Loan loan : loans){
-            if (loan.getBook().ID() == bookID){
+            if (loan.getBook().getIdentifier() == bookID){
                 loans.remove(loan); return true;
             }
         }
@@ -49,7 +49,7 @@ public class Library {
 
     public Book getBook(int bookID){
         for (Book book : books){
-            if (book.ID() == bookID){
+            if (book.getIdentifier() == bookID){
                 return book;
             }
         }
@@ -63,7 +63,7 @@ public class Library {
     }
     public Loan getLoan(int bookID){
         for (Loan loan : loans){
-            if (loan.getBook().ID() == bookID){return loan;}
+            if (loan.getBook().getIdentifier() == bookID){return loan;}
         }
         return null;
     }

@@ -39,7 +39,7 @@ public class ConsoleUI {
         if (library.getLoan(bookID) != null){
         returnerName = library.getLoan(bookID).getBorrower().name();}
         if (library.returnBook(bookID)){
-            IO.println(String.format("Thank you %s! %s was successfully returned!", returnerName,library.getBook(bookID).title()));
+            IO.println(String.format("Thank you %s! %s was successfully returned!", returnerName,library.getBook(bookID).getTitle()));
         }
         else {IO.println("Sorry, that book is not loaned out, or there was some other error...");}
     }
@@ -49,7 +49,7 @@ public class ConsoleUI {
         int memberID = Integer.parseInt(IO.readln("Input your Membership ID:"));
         if (library.loanBook(bookID,memberID)){
             IO.println(String.format("Thank you for loaning %s, %s!",
-                    library.getBook(bookID).title(), library.getMember(memberID).name()));
+                    library.getBook(bookID).getTitle(), library.getMember(memberID).name()));
         }
         else {IO.println("Sorry, there was an error, or that book is not available...");}
     }
