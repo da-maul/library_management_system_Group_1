@@ -14,8 +14,8 @@ public class ConsoleUI {
             showMenu();
             int choice = Integer.parseInt(IO.readln("Input your choice:"));
             switch (choice){
-                case 1 -> loanBook();
-                case 2 -> returnBook();
+                case 1 -> loanIt();
+                case 2 -> returnIt();
                 case 3 -> showLoans();
                 case 0 -> running = false;
                 default -> IO.println("invalid input");
@@ -33,31 +33,34 @@ public class ConsoleUI {
         }
     }
 
-    public void returnBook(){
-        int bookID = Integer.parseInt(IO.readln("Please input the ID of the book to be returned:"));
+    public void returnIt(){
+        int resourceID = Integer.parseInt(IO.readln("Please input the ID of the media to be returned:"));
         String returnerName = "";
-        if (library.getLoan(bookID) != null){
-        returnerName = library.getLoan(bookID).getBorrower().name();}
-        if (library.returnBook(bookID)){
-            IO.println(String.format("Thank you %s! %s was successfully returned!", returnerName,library.getBook(bookID).title()));
+        if (library.getLoan(resourceID) != null){
+        returnerName = library.getLoan(resourceID).getBorrower().name();}
+        if (library.returnIt(resourceID)){
+            IO.println(String.format("Thank you %s! %s was successfully returned!", returnerName,library.getResource(resourceID).getTitle()));
         }
-        else {IO.println("Sorry, that book is not loaned out, or there was some other error...");}
+        else {IO.println("Sorry, that media is not loaned out, or there was some other error...");}
     }
 
-    public void loanBook(){
-        int bookID = Integer.parseInt(IO.readln("Input the book ID:"));
-        int memberID = Integer.parseInt(IO.readln("Input your Membership ID:"));
-        if (library.loanBook(bookID,memberID)){
-            IO.println(String.format("Thank you for loaning %s, %s!",
-                    library.getBook(bookID).title(), library.getMember(memberID).name()));
+    public void loanIt(){
+        int resourceID = Integer.parseInt(IO.readln("Input the ID of the media to be borrowed:"));
+        int memberID = Integer.parseInt(IO.readln("Input the Membership ID:"));
+        //TODO fix this shit and make it a switch statement that uses the enums from loanIt
+        switch (library.loanIt(resourceID,memberID)){
+            case SUCCESS -> {IO.println(String.format("Thank you for loaning %s, %s!",
+                    library.getResource(resourceID).getTitle(), library.getMember(memberID).name()));}
+            case LOANED_OUT -> {IO.println("Sorry, that media is currently loaned out...");}
+            case RESOURCE_NOT_FOUND -> {IO.println("Sorry, we were unable to find that media...");}
+            case MEMBER_NOT_FOUND -> {IO.println("Incorrect or Missing Member ID");}
         }
-        else {IO.println("Sorry, there was an error, or that book is not available...");}
     }
 
     public void showMenu(){
         IO.println("""
-                1: Loan Book
-                2: Return Book
+                1: Loan media
+                2: Return media
                 3: Show all loans
                 0: End Program""");
     }

@@ -1,0 +1,7 @@
+public enum LoanError {
+    LOANED_OUT,
+    MEMBER_NOT_FOUND,
+    RESOURCE_NOT_FOUND,
+    SUCCESS,
+    OTHER_ERROR
+}
