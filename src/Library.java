@@ -6,7 +6,7 @@ public class Library {
     private final ArrayList<Member> members = new ArrayList<>();
     private final ArrayList<Loan> loans = new ArrayList<>();
 
-    //TODO make enum
+    //
     public LoanError loanIt(int resourceID, int memberID){
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
