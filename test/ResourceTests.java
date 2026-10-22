@@ -5,6 +5,9 @@ public class ResourceTests {
     Movie testMovie = new Movie("TestStudio", "TestTitle", 9999999999999L, "Test Director", 100, 3);
     VideoGame testGame = new VideoGame("TestStudio","TestTitle",9999999999999L,"TestConsole",4);
 
+    //reminder to add a .equals() method override in Book & Movie, Mads
+    //you can find a good example in Movie & VideoGame =w=
+
     @Test
     void movieTest(){
         Movie newTestMovie = new Movie("TestStudio", "TestTitle", 9999999999999L, "Test Director", 100, 3);
