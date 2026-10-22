@@ -2,7 +2,7 @@ public class Book extends Resource {
     private final int pages;
     private final long ISBN;
 
-    public Book(String author, String title, long ISBN, int pages, long identifier) {
+    public Book(String author, String title, long ISBN, int pages, int identifier) {
         super(author, title, identifier);
         this.pages = pages;
         this.ISBN = ISBN;
