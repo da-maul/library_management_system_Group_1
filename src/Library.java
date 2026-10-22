@@ -55,7 +55,6 @@ public class Library {
 
     public Resource getResource(int resourceID){
         for (Resource resource : resources){
-            //TODO this is comparing two wrong values
             if (resource.getIdentifier() == resourceID){
                 return resource;
             }
