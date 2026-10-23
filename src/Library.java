@@ -55,7 +55,6 @@ public class Library {
 
     public Resource getResource(int resourceID){
         for (Resource resource : resources){
-            //TODO this is comparing two wrong values
             if (resource.getIdentifier() == resourceID){
                 return resource;
             }
@@ -73,5 +72,15 @@ public class Library {
             if (loan.getResource().getIdentifier() == resourceID){return loan;}
         }
         return null;
+    }
+
+    @Override
+    public boolean equals(Object maybeLibrary) {
+        if (maybeLibrary instanceof Library otherLibrary){
+            return (getResources().equals(otherLibrary.getResources()) &&
+                    getMembers().equals(otherLibrary.getMembers()) &&
+                    getLoans().equals(otherLibrary.getLoans()));
+        }
+        else {return false;}
     }
 }
