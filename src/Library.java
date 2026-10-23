@@ -73,4 +73,14 @@ public class Library {
         }
         return null;
     }
+
+    @Override
+    public boolean equals(Object maybeLibrary) {
+        if (maybeLibrary instanceof Library otherLibrary){
+            return (getResources().equals(otherLibrary.getResources()) &&
+                    getMembers().equals(otherLibrary.getMembers()) &&
+                    getLoans().equals(otherLibrary.getLoans()));
+        }
+        else {return false;}
+    }
 }
