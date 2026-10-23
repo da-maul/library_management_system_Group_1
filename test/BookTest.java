@@ -6,7 +6,7 @@ class BookTest {
     @Test
     void testBookConstructorAndGetters() {
         // Arange
-        Book book = new Book("Allan B. Downey", "Think Java", 9781492072508L, 324,1);
+        Book book = new Book("Allan B. Downey", "Think Java", "999-9-9999-9999-9", 324,1);
 
         // Assert
         assertEquals("Allan B. Downey", book.getCreator());
@@ -18,7 +18,7 @@ class BookTest {
     @Test
     void testBookToString() {
         // Arange
-        Book book = new Book("Rachel Cusk", "Omrids", 9788763851664L, 240,2);
+        Book book = new Book("Rachel Cusk", "Omrids", "999-9-9999-9999-9", 240,2);
 
         // Assert
         String expected = "Omrids by Rachel Cusk, ISBN: 9788763851664. id: 2";

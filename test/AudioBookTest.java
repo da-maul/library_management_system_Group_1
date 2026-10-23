@@ -6,7 +6,7 @@ class AudioBookTest {
     @Test
     void testAudioBookConstructorAndGetters() {
         // Arrange & Act
-        AudioBook audioBook = new AudioBook("Stephen King", "The Shining", 360, 9780307743657L, 4);
+        AudioBook audioBook = new AudioBook("Stephen King", "The Shining", 360, "999-9-9999-9999-9", 4);
 
         // Assert
         assertEquals("Stephen King", audioBook.getAuthor());

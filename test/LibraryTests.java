@@ -22,7 +22,7 @@ class LibraryTests {
 
     @Test
     void validLoanSucceeds() {
-        testLibrary.addBook(new Book("Author","Title",9999999999999L,100,1));
+        testLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         testLibrary.addMember(new Member("Name",1));
         LoanError loanResult = testLibrary.loanIt(1,1);
         assertEquals(LoanError.SUCCESS, loanResult);
@@ -30,7 +30,7 @@ class LibraryTests {
 
     @Test
     void invalidResourceCannotBeLoaned(){
-        testLibrary.addBook(new Book("Author","Title",9999999999999L,100,1));
+        testLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         testLibrary.addMember(new Member("Name",1));
         LoanError loanResult = testLibrary.loanIt(2,1);
         assertEquals(LoanError.RESOURCE_NOT_FOUND, loanResult);
@@ -38,7 +38,7 @@ class LibraryTests {
 
     @Test
     void invalidMemberCannotLoan(){
-        testLibrary.addBook(new Book("Author","Title",9999999999999L,100,1));
+        testLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         testLibrary.addMember(new Member("Name",1));
         LoanError loanResult = testLibrary.loanIt(1,2);
         assertEquals(LoanError.MEMBER_NOT_FOUND, loanResult);
@@ -46,7 +46,7 @@ class LibraryTests {
 
     @Test
     void loanedResourceCannotBeLoaned(){
-        testLibrary.addBook(new Book("Author","Title",9999999999999L,100,1));
+        testLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         testLibrary.addMember(new Member("Name",1));
         testLibrary.loanIt(1,1);
         LoanError loanResult = testLibrary.loanIt(1,1);
@@ -55,7 +55,7 @@ class LibraryTests {
 
     @Test
     void returnedResourceCanBeLoaned(){
-        testLibrary.addBook(new Book("Author","Title",9999999999999L,100,1));
+        testLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         testLibrary.addMember(new Member("Name",1));
         testLibrary.loanIt(1,1);
         testLibrary.returnIt(1);
@@ -65,7 +65,7 @@ class LibraryTests {
 
     @Test
     void resourceCanOnlyBeReturnedIfLoaned() {
-        testLibrary.addBook(new Book("Author", "Title", 9999999999999L, 100, 1));
+        testLibrary.addBook(new Book("Author", "Title", "999-9-9999-9999-9", 100, 1));
         testLibrary.addMember(new Member("Name", 1));
         boolean loanResult = testLibrary.returnIt(1);
         assertFalse(loanResult);
@@ -74,24 +74,17 @@ class LibraryTests {
     @Test
     void invalidOperationsDoNotCorruptLibrary() {
         Library patternLibrary = new Library();
-        patternLibrary.addBook(new Book("Author","Title",9999999999999L,100,1));
+        patternLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         patternLibrary.addMember(new Member("Name",1));
 
-        testLibrary.addBook(new Book("Author","Title",9999999999999L,100,1));
+        testLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         testLibrary.addMember(new Member("Name",1));
-
-        IO.println(testLibrary.getResource(1));
-        IO.println(patternLibrary.getResource(1));
 
         testLibrary.loanIt(3,1);
         testLibrary.loanIt(1,3);
         testLibrary.returnIt(1);
 
-        boolean loanCheck = testLibrary.getLoans().equals(patternLibrary.getLoans());
-        boolean memberCheck = testLibrary.getMembers().equals(patternLibrary.getMembers());
-        boolean resourceCheck = testLibrary.getResources().equals(patternLibrary.getResources());
-
-        assertEquals(patternLibrary.getResource(1),testLibrary.getResource(1));
+        assertEquals(patternLibrary, testLibrary);
     }
 
 }

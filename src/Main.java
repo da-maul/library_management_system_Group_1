@@ -14,7 +14,7 @@ void main() {
             "832-6-9127-1258-3", 464,3);
 
 
-    AudioBook audioBook = new AudioBook("Stephen King", "The Shining", 360, 9780307743657L, 4);
+    AudioBook audioBook = new AudioBook("Stephen King", "The Shining", 360, "999-9-9999-9999-9", 4);
     library.addResource(audioBook);
 
     library.addResource(book1); library.addResource(book2); library.addResource(book3);

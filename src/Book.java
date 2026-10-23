@@ -25,6 +25,6 @@ public class Book extends Resource {
 
     @Override
     public String toString() {
-        return String.format("%s by %s, ISBN: %d. id: %d", getTitle(), getCreator(), ISBN, getIdentifier());
+        return String.format("%s by %s, ISBN: %s. id: %d", getTitle(), getCreator(), ISBN, getIdentifier());
     }
 }
