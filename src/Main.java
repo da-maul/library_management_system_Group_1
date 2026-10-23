@@ -5,13 +5,13 @@ void main() {
 
     Book book1 = new Book("Allan B. Downey",
             "Think Java",
-            9781492072508L, 324,1);
+            "978-1-4028-9462-6", 324,1);
     Book book2 = new Book("Rachel Cusk",
             "Omrids",
-            9788763851664L, 240,2);
+            "732-5-2817-4127-6", 240,2);
     Book book3 = new Book("Yuval Noah Harari",
             "Sapiens",
-            9780062316097L, 464,3);
+            "832-6-9127-1258-3", 464,3);
 
 
     AudioBook audioBook = new AudioBook("Stephen King", "The Shining", 360, 9780307743657L, 4);
