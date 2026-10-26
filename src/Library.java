@@ -10,7 +10,7 @@ public class Library {
     //TODO loanIt must obey LoanPolicy object's rules.
     public LoanError loanIt(int resourceID, int memberID){
         //TODO initialize loan policy at this point, save params.
-        // new exit conditon based on invalidity due to LoanPolicy rules
+        // return new exit condition based on invalidity due to LoanPolicy rules
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
         //TODO newLoan takes params from LoanPolicy
