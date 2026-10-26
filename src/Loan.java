@@ -7,11 +7,11 @@ public class Loan {
     final LocalDate borrowDate;
     final private LocalDate dueDate;
 
-    public Loan(Resource resource, Member borrower, LocalDate borrowDate){
+    public Loan(Resource resource, Member borrower, LocalDate borrowDate, int loanDays){
         this.resource = resource;
         this.borrower = borrower;
         this.borrowDate = borrowDate;
-        dueDate = borrowDate.plusDays(14);
+        this.dueDate = borrowDate.plusDays(loanDays);
     }
 
     //getters
