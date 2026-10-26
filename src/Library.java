@@ -2,14 +2,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 public class Library {
 
+    //TODO add LoanPolicy object variable.
     private final ArrayList<Resource> resources = new ArrayList<>();
     private final ArrayList<Member> members = new ArrayList<>();
     private final ArrayList<Loan> loans = new ArrayList<>();
 
-    //
+    //TODO loanIt must obey LoanPolicy object's rules.
     public LoanError loanIt(int resourceID, int memberID){
+        //TODO initialize loan policy at this point, save params.
+        // return new exit condition based on invalidity due to LoanPolicy rules
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
+        //TODO newLoan takes params from LoanPolicy
         Loan newLoan = new Loan(getResource(resourceID),getMember(memberID),LocalDate.now());
         if (loans.contains(newLoan)){return LoanError.LOANED_OUT;}
         loans.add(newLoan);
