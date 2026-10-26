@@ -10,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 //TODO loaned-out material cannot be loaned again ✓
 //TODO loaned-out material can be returned and loaned ✓
 //TODO loaned-out material can only be returned if a loan exists ✓
-//TODO invalid operations do not corrupt library
+//TODO invalid operations do not corrupt library ✓
+
 class LibraryTests {
 
     Library testLibrary = new Library();
