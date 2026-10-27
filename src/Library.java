@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 public class Library {
+    private final LocalDate today = LocalDate.now();
+
+    LoanPolicy loanPolicy = new StandardLoanPolicy();
 
     //TODO add LoanPolicy object variable.
     private final ArrayList<Resource> resources = new ArrayList<>();
@@ -14,7 +17,7 @@ public class Library {
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
         //TODO newLoan takes params from LoanPolicy
-        Loan newLoan = new Loan(getResource(resourceID),getMember(memberID),LocalDate.now());
+        Loan newLoan = new Loan(getResource(resourceID),getMember(memberID),loanPolicy.calculateDueDate(today));
         if (loans.contains(newLoan)){return LoanError.LOANED_OUT;}
         loans.add(newLoan);
         return LoanError.SUCCESS;
