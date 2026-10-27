@@ -7,11 +7,11 @@ public class Loan {
     final LocalDate borrowDate;
     final private LocalDate dueDate;
 
-    public Loan(Resource resource, Member borrower, LocalDate borrowDate, int loanDays){
+    public Loan(Resource resource, Member borrower, LocalDate borrowDate,LocalDate dueDate){
         this.resource = resource;
         this.borrower = borrower;
         this.borrowDate = borrowDate;
-        this.dueDate = borrowDate.plusDays(loanDays);
+        this.dueDate = dueDate;
     }
 
     //getters
@@ -28,7 +28,7 @@ public class Loan {
                 %s
                 Borrowed by: %s
                 Due on: %s
-                """, resource, borrower, dueDate);
+                """, resource, borrower,dueDate);
     }
 
     @Override

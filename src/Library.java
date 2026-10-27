@@ -11,13 +11,14 @@ public class Library {
 
     //TODO loanIt must obey LoanPolicy object's rules.
     public LoanError loanIt(int resourceID, int memberID){
-        LocalDate today = LocalDate.now();
         //TODO initialize loan policy at this point, save params.
         // return new exit condition based on invalidity due to LoanPolicy rules
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
         //TODO newLoan takes params from LoanPolicy
-        Loan newLoan = new Loan(getResource(resourceID),getMember(memberID),loanPolicy.calculateDueDate(today));
+        LocalDate borrowDate = LocalDate.now();
+        LocalDate dueDate = loanPolicy.calculateDueDate(borrowDate);
+        Loan newLoan = new Loan(getResource(resourceID), getMember(memberID), borrowDate, dueDate);
         if (loans.contains(newLoan)){return LoanError.LOANED_OUT;}
         loans.add(newLoan);
         return LoanError.SUCCESS;
