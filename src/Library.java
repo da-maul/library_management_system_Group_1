@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 public class Library {
-    private final LocalDate today = LocalDate.now();
 
     LoanPolicy loanPolicy = new StandardLoanPolicy();
 
@@ -12,6 +11,7 @@ public class Library {
 
     //TODO loanIt must obey LoanPolicy object's rules.
     public LoanError loanIt(int resourceID, int memberID){
+        LocalDate today = LocalDate.now();
         //TODO initialize loan policy at this point, save params.
         // return new exit condition based on invalidity due to LoanPolicy rules
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
