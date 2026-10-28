@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.util.Objects;
 
+// A single loan: who borrowed what, when, and when it must be returned.
+// Loan only stores the values it is given; the due date is calculated
+// by the LoanPolicy in Library before the Loan is created.
 public class Loan {
     final Resource resource;
     final Member borrower;
@@ -19,6 +22,7 @@ public class Loan {
     public Member getBorrower(){return borrower;}
     public LocalDate getDueDate(){return dueDate;}
 
+    // true if today is after the due date, meaning the material should be recalled
     public boolean isOverdue(){
         return LocalDate.now().isAfter(dueDate);
     }
@@ -31,6 +35,7 @@ public class Loan {
                 """, resource, borrower,dueDate);
     }
 
+    // Two loans are equal if they are for the same material, so a material can't be loaned out twice.
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;

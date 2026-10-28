@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class ConsoleUI {
 
     private final Library library;
@@ -25,7 +23,7 @@ public class ConsoleUI {
 
     public void showLoans(){
         int memberID = Integer.parseInt(IO.readln("Please input your member ID:"));
-        if (library.getLoansByMemberID(memberID).equals(new ArrayList<>())){
+        if (library.getLoansByMemberID(memberID).isEmpty()){
             IO.println("You have no active loans!");
         }
         else {
