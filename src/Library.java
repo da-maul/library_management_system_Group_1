@@ -61,6 +61,10 @@ public class Library {
     public void addAudiobook(AudioBook audioBook){resources.add(audioBook);}
     public void addVideoGame(VideoGame videoGame){resources.add(videoGame);}
 
+    public void setLoanPolicy(LoanPolicy loanPolicy) {
+        this.loanPolicy = loanPolicy;
+    }
+
     //getters
     public List<Resource> getResources(){return resources;}
     public List<Member> getMembers() {return members;}
