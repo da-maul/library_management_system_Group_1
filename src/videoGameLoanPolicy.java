@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 
 public class videoGameLoanPolicy implements LoanPolicy{
+    private static final int LOAN_DAYS = 30;
     private int currentCount;
     private int maxAllowed;
 
@@ -14,6 +15,6 @@ public class videoGameLoanPolicy implements LoanPolicy{
 
     @Override
     public LocalDate calculateDueDate(LocalDate borrowDate) {
-        return borrowDate.plusDays(30);
+        return borrowDate.plusDays(LOAN_DAYS);
     }
 }
