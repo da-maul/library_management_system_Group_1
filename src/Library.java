@@ -15,7 +15,7 @@ public class Library {
         // return new exit condition based on invalidity due to LoanPolicy rules
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
-        //TODO newLoan takes params from LoanPolicy
+        if (!loanPolicy.canLoan()) {return LoanError.NOT_PERMITTED;}
         LocalDate borrowDate = LocalDate.now();
         LocalDate dueDate = loanPolicy.calculateDueDate(borrowDate);
         Loan newLoan = new Loan(getResource(resourceID), getMember(memberID), borrowDate, dueDate);
