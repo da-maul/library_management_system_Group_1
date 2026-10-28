@@ -1,13 +1,15 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+
 public class Library {
 
     LoanPolicy loanPolicy = new StandardLoanPolicy();
 
     //TODO add LoanPolicy object variable.
-    private final ArrayList<Resource> resources = new ArrayList<>();
-    private final ArrayList<Member> members = new ArrayList<>();
-    private final ArrayList<Loan> loans = new ArrayList<>();
+    private final List<Resource> resources = new ArrayList<>();
+    private final List<Member> members = new ArrayList<>();
+    private final List<Loan> loans = new ArrayList<>();
 
     //TODO loanIt must obey LoanPolicy object's rules.
     public LoanError loanIt(int resourceID, int memberID){
@@ -33,8 +35,8 @@ public class Library {
         return false;
     }
 
-    public ArrayList<Loan> getLoansByMemberID(int memberID){
-        ArrayList<Loan> returnList = new ArrayList<>();
+    public List<Loan> getLoansByMemberID(int memberID){
+        List<Loan> returnList = new ArrayList<>();
         for (Loan loan : loans){
             if (loan.getBorrower().ID() == memberID){
                 returnList.add(loan);
@@ -57,9 +59,9 @@ public class Library {
     public void addVideoGame(VideoGame videoGame){resources.add(videoGame);}
 
     //getters
-    public ArrayList<Resource> getResources(){return resources;}
-    public ArrayList<Member> getMembers() {return members;}
-    public ArrayList<Loan> getLoans() {return loans;}
+    public List<Resource> getResources(){return resources;}
+    public List<Member> getMembers() {return members;}
+    public List<Loan> getLoans() {return loans;}
 
     public Resource getResource(int resourceID){
         for (Resource resource : resources){
