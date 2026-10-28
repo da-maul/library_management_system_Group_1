@@ -6,15 +6,6 @@ void main() {
     LoanPolicy aalborgRegel = new videoGameLoanPolicy(0, 3);
 
     Library library = new Library(loanPolicy);
-    library.loanIt(1, 1337);
-
-    //mangler IO.println til at udskrive de forskellige loan policies.
-
-    library.setLoanPolicy(aalborgRegel);
-    library.loanIt(4, 1337);
-
-    library.setLoanPolicy(bornholmRegel);
-    library.loanIt(4, 6969);
 
     Book book1 = new Book("Allan B. Downey",
             "Think Java",
@@ -26,10 +17,11 @@ void main() {
             "Sapiens",
             "832-6-9127-1258-3", 464,3);
 
+    AudioBook audioBook = new AudioBook("Stephen King",
+            "The Shining",
+            360, "999-9-9999-9999-9", 4);
 
-    AudioBook audioBook = new AudioBook("Stephen King", "The Shining", 360, "999-9-9999-9999-9", 4);
     library.addResource(audioBook);
-
     library.addResource(book1); library.addResource(book2); library.addResource(book3);
 
     Member joe = new Member("Joe Mama", 1337);
@@ -37,6 +29,17 @@ void main() {
     Member ben = new Member("Ben Dover", 8008);
 
     library.addMember(joe); library.addMember(hugh); library.addMember(ben);
+
+
+    //Tests -------------------
+    library.loanIt(1, 1337);
+
+    library.setLoanPolicy(aalborgRegel);
+    IO.println(library.loanIt(4, 1337));
+
+    library.setLoanPolicy(bornholmRegel);
+    IO.println(library.loanIt(4, 6969));
+    // -----------------------
 
     ConsoleUI console = new ConsoleUI(library);
 
