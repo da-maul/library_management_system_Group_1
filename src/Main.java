@@ -1,7 +1,8 @@
 
 void main() {
 
-    Library library = new Library();
+    LoanPolicy loanPolicy = new StandardLoanPolicy();
+    Library library = new Library(loanPolicy);
 
     Book book1 = new Book("Allan B. Downey",
             "Think Java",

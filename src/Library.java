@@ -3,10 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
+    private LoanPolicy loanPolicy;
 
-    LoanPolicy loanPolicy = new StandardLoanPolicy();
+    public Library(LoanPolicy loanPolicy) {
+        this.loanPolicy = loanPolicy;
+    }
 
-    //TODO add LoanPolicy object variable.
+   //TODO add LoanPolicy object variable.
     private final List<Resource> resources = new ArrayList<>();
     private final List<Member> members = new ArrayList<>();
     private final List<Loan> loans = new ArrayList<>();
