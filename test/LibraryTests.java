@@ -14,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTests {
 
-    Library testLibrary = new Library();
+    Library testLibrary = new Library(new StandardLoanPolicy());
 
     @BeforeEach
     void resetLibrary(){
-        testLibrary = new Library();
+        testLibrary = new Library(new StandardLoanPolicy());
     }
 
     @Test
@@ -74,7 +74,7 @@ class LibraryTests {
 
     @Test
     void invalidOperationsDoNotCorruptLibrary() {
-        Library patternLibrary = new Library();
+        Library patternLibrary = new Library(new StandardLoanPolicy());
         patternLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         patternLibrary.addMember(new Member("Name",1));
 
