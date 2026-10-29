@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -13,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 //TODO invalid operations do not corrupt library ✓
 
 class LibraryTests {
-
-    Library testLibrary = new Library(new StandardLoanPolicy());
+    TestDoubleLoanPolicy testLoanPolicy;
+    Library testLibrary;
 
     @BeforeEach
     void resetLibrary(){
-        testLibrary = new Library(new StandardLoanPolicy());
+        testLoanPolicy = new TestDoubleLoanPolicy();
+        testLibrary = new Library(testLoanPolicy);
     }
 
     @Test
@@ -27,6 +31,8 @@ class LibraryTests {
         testLibrary.addMember(new Member("Name",1));
         LoanError loanResult = testLibrary.loanIt(1,1);
         assertEquals(LoanError.SUCCESS, loanResult);
+        assertTrue(testLoanPolicy.canLoanWasCalled);
+        assertTrue(testLoanPolicy.calculateDueDateWasCalled);
     }
 
     @Test
