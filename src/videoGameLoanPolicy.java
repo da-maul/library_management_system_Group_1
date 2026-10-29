@@ -13,10 +13,15 @@ public class videoGameLoanPolicy implements LoanPolicy{
 
     //TODO check if resource to be loaned is a VideoGame or not, enforce max limit only on games.
     @Override
-    public boolean canLoan() {return currentCount < maxAllowed;}
+    public boolean canLoan(Resource resource) {
+        if(resource instanceof VideoGame){
+            return currentCount < maxAllowed;
+        }
+        return true;
+    }
 
     @Override
-    public LocalDate calculateDueDate(LocalDate borrowDate) {
+    public LocalDate calculateDueDate(LocalDate borrowDate,Resource resource) {
         return borrowDate.plusDays(LOAN_DAYS);
     }
 }
