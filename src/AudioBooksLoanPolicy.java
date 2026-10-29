@@ -5,7 +5,7 @@ public class AudioBooksLoanPolicy implements LoanPolicy{
    int STANDARD_LOAN_DAYS = 30;
 
     @Override
-    public boolean canLoan() {
+    public boolean canLoan(Resource resource) {
         return true;
     }
 

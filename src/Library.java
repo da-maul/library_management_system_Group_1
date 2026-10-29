@@ -21,9 +21,9 @@ public class Library {
         // use stored variables instead of calling LoanPolicy directly.
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
-        if (!loanPolicy.canLoan()) {return LoanError.NOT_PERMITTED;}
+        if (!loanPolicy.canLoan(getResource(resourceID))) {return LoanError.NOT_PERMITTED;}
         LocalDate borrowDate = LocalDate.now();
-        LocalDate dueDate = loanPolicy.calculateDueDate(borrowDate);
+        LocalDate dueDate = loanPolicy.calculateDueDate(borrowDate, getResource(resourceID));
         Loan newLoan = new Loan(getResource(resourceID), getMember(memberID), borrowDate, dueDate);
         if (loans.contains(newLoan)){return LoanError.LOANED_OUT;}
         loans.add(newLoan);
