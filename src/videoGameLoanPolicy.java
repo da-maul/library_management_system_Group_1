@@ -2,14 +2,8 @@ import java.time.LocalDate;
 
 public class videoGameLoanPolicy implements LoanPolicy{
     private static final int LOAN_DAYS = 30;
-    private int currentCount;
-    private int maxAllowed;
-
-    //TODO remove constructor, hard code loan policy values
-    public videoGameLoanPolicy(int currentCount, int maxAllowed){
-        this.currentCount = currentCount;
-        this.maxAllowed = maxAllowed;
-    }
+    private final int currentCount = 0;
+    private final int maxAllowed = 3;
 
     //TODO check if resource to be loaned is a VideoGame or not, enforce max limit only on games.
     @Override
