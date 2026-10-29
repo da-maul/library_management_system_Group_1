@@ -3,7 +3,7 @@ void main() {
 
     LoanPolicy loanPolicy = new StandardLoanPolicy();
     LoanPolicy bornholmRegel = new AudioBooksLoanPolicy();
-    //LoanPolicy aalborgRegel = new videoGameLoanPolicy(0, 3);
+    LoanPolicy aalborgRegel = new videoGameLoanPolicy();
 
     Library library = new Library(loanPolicy);
 
@@ -56,17 +56,16 @@ void main() {
     IO.println();
     IO.println("Aalborg-reglen (Test af mængdebegrænsning):");
 
-    int maxCount = 3;
     int startID = 10;
 
     for (int id = startID; id <= 13; id++) {
         int gameLoanCount = 0;
         for (Loan loan : library.getLoansByMemberID(1337)) {
-            if (loan.getResource() instanceof VideoGame || loan.getResource() instanceof Movie) {
+            if (loan.getResource() instanceof VideoGame) {
                 gameLoanCount++;
             }
         }
-        //library.setLoanPolicy(new videoGameLoanPolicy(gameLoanCount, maxCount));
+        library.setLoanPolicy(aalborgRegel);
         LoanError result = library.loanIt(id, 1337);
         IO.println("Låner ID " + id + " | Spil i forvejen: " + gameLoanCount + " | Svar: " + result);
     }
@@ -74,8 +73,8 @@ void main() {
 
     // Tests -----------------------
 
-    ConsoleUI console = new ConsoleUI(library);
-
-    console.run();
+//    ConsoleUI console = new ConsoleUI(library);
+//
+//    console.run();
 
 }

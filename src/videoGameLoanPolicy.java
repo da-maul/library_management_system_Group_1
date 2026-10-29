@@ -5,13 +5,11 @@ public class videoGameLoanPolicy implements LoanPolicy{
     private static final int LOAN_DAYS = 30;
     private final int maxAllowed = 3;
 
-    private final Library library;
     private final LibrarySearchHelper searchHelper;
 
     //Konstruktøren tager imod SeachHelper og medlemmets specifikke lån
-    public videoGameLoanPolicy(Library library) {
-        this.library = library;
-        this.searchHelper = new LibrarySearchHelper(library);
+    public videoGameLoanPolicy() {
+        this.searchHelper = new LibrarySearchHelper();
 
     }
     //TODO check if resource to be loaned is a VideoGame or not, enforce max limit only on games.

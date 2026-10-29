@@ -1,10 +1,8 @@
 import java.util.List;
 
 public class LibrarySearchHelper {
-    private final Library library;
 
-    public LibrarySearchHelper(Library library) {
-        this.library = library;
+    public LibrarySearchHelper() {
     }
 
     // Gennemser en liste af eksisterende lån og tæller, hvor mange der matcher en specifik ressourcetype.
