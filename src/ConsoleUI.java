@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class ConsoleUI {
 
     private final Library library;
@@ -25,7 +23,7 @@ public class ConsoleUI {
 
     public void showLoans(){
         int memberID = Integer.parseInt(IO.readln("Please input your member ID:"));
-        if (library.getLoansByMemberID(memberID).equals(new ArrayList<>())){
+        if (library.getLoansByMemberID(memberID).isEmpty()){
             IO.println("You have no active loans!");
         }
         else {
@@ -47,7 +45,6 @@ public class ConsoleUI {
     public void loanIt(){
         int resourceID = Integer.parseInt(IO.readln("Input the ID of the media to be borrowed:"));
         int memberID = Integer.parseInt(IO.readln("Input the Membership ID:"));
-        //TODO fix this shit and make it a switch statement that uses the enums from loanIt
         switch (library.loanIt(resourceID,memberID)){
             case SUCCESS -> {IO.println(String.format("Thank you for loaning %s, %s!",
                     library.getResource(resourceID).getTitle(), library.getMember(memberID).name()));}

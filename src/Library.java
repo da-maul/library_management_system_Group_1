@@ -1,17 +1,36 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+
 public class Library {
+    private LoanPolicy loanPolicy;
 
-    private final ArrayList<Resource> resources = new ArrayList<>();
-    private final ArrayList<Member> members = new ArrayList<>();
-    private final ArrayList<Loan> loans = new ArrayList<>();
+    public Library(LoanPolicy loanPolicy) {
+        this.loanPolicy = loanPolicy;
+    }
 
-    //
+   //TODO add LoanPolicy object variable.
+    private final List<Resource> resources = new ArrayList<>();
+    private final List<Member> members = new ArrayList<>();
+    private final List<Loan> loans = new ArrayList<>();
+
+
     public LoanError loanIt(int resourceID, int memberID){
+        //loanIt method is governed by loanPolicy object, be sure to expand if additional loanPolicies are added.
+        //checks if resource is valid
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
+        //checks if member is valid
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
-        Loan newLoan = new Loan(getResource(resourceID),getMember(memberID),LocalDate.now());
+        //checks if user is allowed to borrow based on loanPolicy
+        if (!loanPolicy.canLoan(getResource(resourceID),memberID,loans)) {return LoanError.NOT_PERMITTED;}
+        //calculates due date based on loanPolicy
+        LocalDate borrowDate = LocalDate.now();
+        LocalDate dueDate = loanPolicy.calculateDueDate(borrowDate, getResource(resourceID));
+        //initialize loan
+        Loan newLoan = new Loan(getResource(resourceID), getMember(memberID), borrowDate, dueDate);
+        //checks if loan is already loaned out
         if (loans.contains(newLoan)){return LoanError.LOANED_OUT;}
+        //add loan to loan list and end method
         loans.add(newLoan);
         return LoanError.SUCCESS;
     }
@@ -25,8 +44,8 @@ public class Library {
         return false;
     }
 
-    public ArrayList<Loan> getLoansByMemberID(int memberID){
-        ArrayList<Loan> returnList = new ArrayList<>();
+    public List<Loan> getLoansByMemberID(int memberID){
+        List<Loan> returnList = new ArrayList<>();
         for (Loan loan : loans){
             if (loan.getBorrower().ID() == memberID){
                 returnList.add(loan);
@@ -48,10 +67,14 @@ public class Library {
     public void addAudiobook(AudioBook audioBook){resources.add(audioBook);}
     public void addVideoGame(VideoGame videoGame){resources.add(videoGame);}
 
+    public void setLoanPolicy(LoanPolicy loanPolicy) {
+        this.loanPolicy = loanPolicy;
+    }
+
     //getters
-    public ArrayList<Resource> getResources(){return resources;}
-    public ArrayList<Member> getMembers() {return members;}
-    public ArrayList<Loan> getLoans() {return loans;}
+    public List<Resource> getResources(){return resources;}
+    public List<Member> getMembers() {return members;}
+    public List<Loan> getLoans() {return loans;}
 
     public Resource getResource(int resourceID){
         for (Resource resource : resources){

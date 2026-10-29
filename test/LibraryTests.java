@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -10,14 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 //TODO loaned-out material cannot be loaned again ✓
 //TODO loaned-out material can be returned and loaned ✓
 //TODO loaned-out material can only be returned if a loan exists ✓
-//TODO invalid operations do not corrupt library
-class LibraryTests {
+//TODO invalid operations do not corrupt library ✓
 
-    Library testLibrary = new Library();
+class LibraryTests {
+    TestDoubleLoanPolicy testLoanPolicy;
+    Library testLibrary;
 
     @BeforeEach
     void resetLibrary(){
-        testLibrary = new Library();
+        testLoanPolicy = new TestDoubleLoanPolicy();
+        testLibrary = new Library(testLoanPolicy);
     }
 
     @Test
@@ -26,6 +31,8 @@ class LibraryTests {
         testLibrary.addMember(new Member("Name",1));
         LoanError loanResult = testLibrary.loanIt(1,1);
         assertEquals(LoanError.SUCCESS, loanResult);
+        assertTrue(testLoanPolicy.canLoanWasCalled);
+        assertTrue(testLoanPolicy.calculateDueDateWasCalled);
     }
 
     @Test
@@ -73,7 +80,7 @@ class LibraryTests {
 
     @Test
     void invalidOperationsDoNotCorruptLibrary() {
-        Library patternLibrary = new Library();
+        Library patternLibrary = new Library(new StandardLoanPolicy());
         patternLibrary.addBook(new Book("Author","Title","999-9-9999-9999-9",100,1));
         patternLibrary.addMember(new Member("Name",1));
 

@@ -3,5 +3,6 @@ public enum LoanError {
     MEMBER_NOT_FOUND,
     RESOURCE_NOT_FOUND,
     SUCCESS,
-    OTHER_ERROR
+    OTHER_ERROR,
+    NOT_PERMITTED
 }

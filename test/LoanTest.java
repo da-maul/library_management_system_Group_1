@@ -19,7 +19,9 @@ public class LoanTest {
                 "Think Java",
                 "999-9-9999-9999-9", 324,1);
         Member joe = new Member("Joe Mama", 1337);
-        Loan loan = new Loan(book1,joe, LocalDate.now());
+        LocalDate borrowDate = LocalDate.of(2026, 10, 27);
+        LocalDate dueDate = LocalDate.of(2026, 11, 26);
+        Loan loan = new Loan(book1, joe, borrowDate, dueDate);
         assertEquals(book1,loan.getResource());
         assertEquals(joe,loan.getBorrower());
         assertEquals(LocalDate.now(),loan.borrowDate);
