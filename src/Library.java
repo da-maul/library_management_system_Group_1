@@ -21,6 +21,9 @@ public class Library {
         // use stored variables instead of calling LoanPolicy directly.
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
+        LoanPolicy activePolicy = this.loanPolicy;
+        if (activePolicy instanceof videoGameLoanPolicy) {activePolicy = new videoGameLoanPolicy(this, memberID);}
+        if (!activePolicy.canLoan(getResource(resourceID))) {return LoanError.NOT_PERMITTED;}
         if (!loanPolicy.canLoan(getResource(resourceID))) {return LoanError.NOT_PERMITTED;}
         LocalDate borrowDate = LocalDate.now();
         LocalDate dueDate = loanPolicy.calculateDueDate(borrowDate, getResource(resourceID));

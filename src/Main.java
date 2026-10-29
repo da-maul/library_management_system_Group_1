@@ -66,7 +66,7 @@ void main() {
                 gameLoanCount++;
             }
         }
-        library.setLoanPolicy(new videoGameLoanPolicy(gameLoanCount, maxCount));
+        //library.setLoanPolicy(new videoGameLoanPolicy(gameLoanCount, maxCount));
         LoanError result = library.loanIt(id, 1337);
         IO.println("Låner ID " + id + " | Spil i forvejen: " + gameLoanCount + " | Svar: " + result);
     }
