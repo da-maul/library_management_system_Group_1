@@ -6,23 +6,19 @@ public class videoGameLoanPolicy implements LoanPolicy{
     private final int maxAllowed = 3;
 
     private final Library library;
-    private final int memberID;
     private final LibrarySearchHelper searchHelper;
 
     //Konstruktøren tager imod SeachHelper og medlemmets specifikke lån
-    public videoGameLoanPolicy(Library library, int memberID) {
+    public videoGameLoanPolicy(Library library) {
         this.library = library;
-        this.memberID = memberID;
         this.searchHelper = new LibrarySearchHelper(library);
 
     }
     //TODO check if resource to be loaned is a VideoGame or not, enforce max limit only on games.
     @Override
-    public boolean canLoan(Resource resource) {
+    public boolean canLoan(Resource resource,int memberID, List<Loan> Loans) {
         if(resource instanceof VideoGame){
-            //Vi henter bare lånene direkte fra library
-            List<Loan> memberLoans = library.getLoansByMemberID(memberID);
-            int currentGameCount = searchHelper.countLoansByResourceType(memberLoans, VideoGame.class);
+            int currentGameCount = searchHelper.countLoansByResourceType(Loans, VideoGame.class);
             return currentGameCount < maxAllowed;
         }
         return true;

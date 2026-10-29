@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StandardLoanPolicyTest {
     LoanPolicy policy = new StandardLoanPolicy();
 
+
     @Test
     void canLoanAlwaysReturnsTrue(){
         assertTrue(policy.canLoan());

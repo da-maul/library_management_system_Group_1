@@ -1,15 +1,15 @@
 import java.time.LocalDate;
+import java.util.List;
 
 public class AudioBooksLoanPolicy implements LoanPolicy{
    int AUDIOBOOK_LOAN_DAYS = 14;
    int STANDARD_LOAN_DAYS = 30;
 
     @Override
-    public boolean canLoan(Resource resource) {
+    public boolean canLoan(Resource resource,int memberID, List<Loan> Loans) {
         return true;
     }
 
-    //TODO check if resource to be loaned is AudioBook, loan period set to 14 days if so. Otherwise 30 days as normal.
     @Override
     public LocalDate calculateDueDate(LocalDate borrowDate,Resource resource) {
         if (resource instanceof AudioBook){

@@ -14,21 +14,23 @@ public class Library {
     private final List<Member> members = new ArrayList<>();
     private final List<Loan> loans = new ArrayList<>();
 
-    //TODO loanIt must obey LoanPolicy object's rules.
+
     public LoanError loanIt(int resourceID, int memberID){
-        //TODO initialize loan policy at this point, save params.
-        // make LoanPolicy take in resource to be loaned for its logic.
-        // use stored variables instead of calling LoanPolicy directly.
+        //loanIt method is governed by loanPolicy object, be sure to expand if additional loanPolicies are added.
+        //checks if resource is valid
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
+        //checks if member is valid
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
-        LoanPolicy activePolicy = this.loanPolicy;
-        if (activePolicy instanceof videoGameLoanPolicy) {activePolicy = new videoGameLoanPolicy(this, memberID);}
-        if (!activePolicy.canLoan(getResource(resourceID))) {return LoanError.NOT_PERMITTED;}
-        if (!loanPolicy.canLoan(getResource(resourceID))) {return LoanError.NOT_PERMITTED;}
+        //checks if user is allowed to borrow based on loanPolicy
+        if (!loanPolicy.canLoan(getResource(resourceID),memberID,loans)) {return LoanError.NOT_PERMITTED;}
+        //calculates due date based on loanPolicy
         LocalDate borrowDate = LocalDate.now();
         LocalDate dueDate = loanPolicy.calculateDueDate(borrowDate, getResource(resourceID));
+        //initialize loan
         Loan newLoan = new Loan(getResource(resourceID), getMember(memberID), borrowDate, dueDate);
+        //checks if loan is already loaned out
         if (loans.contains(newLoan)){return LoanError.LOANED_OUT;}
+        //add loan to loan list and end method
         loans.add(newLoan);
         return LoanError.SUCCESS;
     }
