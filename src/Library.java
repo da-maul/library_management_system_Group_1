@@ -17,7 +17,8 @@ public class Library {
     //TODO loanIt must obey LoanPolicy object's rules.
     public LoanError loanIt(int resourceID, int memberID){
         //TODO initialize loan policy at this point, save params.
-        // return new exit condition based on invalidity due to LoanPolicy rules
+        // make LoanPolicy take in resource to be loaned for its logic.
+        // use stored variables instead of calling LoanPolicy directly.
         if (!resources.contains(getResource(resourceID))) return LoanError.RESOURCE_NOT_FOUND;
         if (!members.contains(getMember(memberID))){return LoanError.MEMBER_NOT_FOUND;}
         if (!loanPolicy.canLoan()) {return LoanError.NOT_PERMITTED;}
