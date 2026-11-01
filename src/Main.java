@@ -39,6 +39,12 @@ void main() {
 
     library.addMember(joe); library.addMember(hugh); library.addMember(ben);
 
+    LibrarySaver librarySaver = new LibrarySaver();
+    try {
+        librarySaver.saveMembers(library.getMembers(),"members.csv");
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
 
     //Tests -------------------
     IO.println("Standard-reglen:");
