@@ -39,12 +39,22 @@ void main() {
 
     library.addMember(joe); library.addMember(hugh); library.addMember(ben);
 
+      //tilføj members til csv filen
     LibrarySaver librarySaver = new LibrarySaver();
     try {
         librarySaver.saveMembers(library.getMembers(),"members.csv");
     } catch (IOException e) {
         throw new RuntimeException(e);
     }
+
+    //Load members fra csv filen
+    LibraryLoader libraryLoader = new LibraryLoader();
+    try {
+        libraryLoader.loadMembers("members.csv");
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+
 
     //Tests -------------------
     IO.println("Standard-reglen:");
