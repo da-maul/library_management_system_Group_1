@@ -1,4 +1,8 @@
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ResourceTests {
@@ -36,4 +40,35 @@ public class ResourceTests {
         assertEquals(newTestAudioBook,newTestAudioBook);
     }
 
+    @Test
+    void CreatorComparatorTest(){
+        ArrayList<Resource> creators = new ArrayList<>();
+        creators.add(new Book("J.K. Rowling", "Harry Potter", "999-9-9999-9999-9", 100, 1));
+        creators.add(new Book("William Shakespeare", "Hamlet", "999-9-9999-9999-9", 200, 2));
+        creators.add(new Book("Stephen King", "IT", "999-9-9999-9999-9", 300, 3));
+        creators.add(new Book("Agatha Christie", "Queen of crime", "999-9-9999-9999-9", 400, 4));
+
+        IO.print("Før: " + creators.toString());
+
+        Collections.sort(creators, new CreatorNameComparator());
+        creators.sort(new CreatorNameComparator());
+
+        IO.print("\nEfter: " + creators.toString());
+    }
+
+    @Test
+    void TitleComparatorTest(){
+        ArrayList<Resource> titles = new ArrayList<>();
+        titles.add(new Book("J.K. Rowling", "Harry Potter", "999-9-9999-9999-9", 100, 1));
+        titles.add(new Book("William Shakespeare", "Hamlet", "999-9-9999-9999-9", 200, 2));
+        titles.add(new Book("Stephen King", "IT", "999-9-9999-9999-9", 300, 3));
+        titles.add(new Book("Agatha Christie", "Queen of crime", "999-9-9999-9999-9", 400, 4));
+
+        IO.print("Før: " + titles.toString());
+
+        Collections.sort(titles, new TitleNameComparator());
+        titles.sort(new TitleNameComparator());
+
+        IO.print("\nEfter: " + titles.toString());
+    }
 }
