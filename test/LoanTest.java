@@ -26,4 +26,33 @@ public class LoanTest {
         assertEquals(joe,loan.getBorrower());
         assertEquals(LocalDate.now(),loan.borrowDate);
     }
+
+    @Test
+    void loansAreComparedByDueDate(){
+        Book book1 = new Book("Allan B. Downey", "Think Java", "999-9-9999-9999-9", 324,1);
+        Member joe = new Member("Joe Mama", 1337);
+        LocalDate borrowDate = LocalDate.of(1900, 1, 1);
+        LocalDate dueDate = LocalDate.of(1970, 1, 1);
+        LocalDate dueDate2 = LocalDate.of(2000, 1, 1);
+        Loan loan = new Loan(book1, joe, borrowDate, dueDate);
+        Loan loan2 = new Loan(book1, joe, borrowDate, dueDate2);
+
+        int comparisonResult = loan.compareTo(loan2);
+        assertTrue(comparisonResult < 0);
+    }
+
+    @Test
+    void loansOfSameDueDateAreNotSorted() {
+        Book book1 = new Book("Allan B. Downey", "Think Java", "999-9-9999-9999-9", 324, 1);
+        Member joe = new Member("Joe Mama", 1337);
+        LocalDate borrowDate = LocalDate.of(1900, 1, 1);
+        LocalDate dueDate = LocalDate.of(1970, 1, 1);
+        Loan loan = new Loan(book1, joe, borrowDate, dueDate);
+        Loan loan2 = new Loan(book1, joe, borrowDate, dueDate);
+
+        int comparisonResult = loan.compareTo(loan2);
+        assertEquals(0, comparisonResult);
+    }
+
+
 }

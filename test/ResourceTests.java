@@ -36,4 +36,20 @@ public class ResourceTests {
         assertEquals(newTestAudioBook,newTestAudioBook);
     }
 
+
+    @Test
+    void resourceComparisonTestEarlierComesFirst(){
+        Book newTestBook = new Book("TestStudio", "TestTitle", "999-9-9999-9999-9", 100, 1);
+        VideoGame newTestGame = new VideoGame("TestStudio","TestTitle",9999999999999L,"TestConsole",4);
+        int comparisonResult = newTestBook.compareTo(newTestGame);
+        assertTrue(comparisonResult < 0);
+    }
+
+    @Test
+    void resourceComparisonTestSameValue(){
+        Book newTestBook = new Book("TestStudio", "TestTitle", "999-9-9999-9999-9", 100, 1);
+        Book newTestBook2 = new Book("TestStudio", "TestTitle", "999-9-9999-9999-9", 100, 1);
+        int comparisonResult = newTestBook.compareTo(newTestBook2);
+        assertEquals(0, comparisonResult);
+    }
 }

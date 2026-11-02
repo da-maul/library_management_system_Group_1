@@ -4,7 +4,7 @@ import java.util.Objects;
 // A single loan: who borrowed what, when, and when it must be returned.
 // Loan only stores the values it is given; the due date is calculated
 // by the LoanPolicy in Library before the Loan is created.
-public class Loan {
+public class Loan implements Comparable<Loan>{
     final Resource resource;
     final Member borrower;
     final LocalDate borrowDate;
@@ -42,5 +42,10 @@ public class Loan {
         Loan oLoan = (Loan) obj;
         return Objects.equals(resource, oLoan.resource) /*&&
                 Objects.equals(borrower, oLoan.borrower)*/;
+    }
+
+    @Override
+    public int compareTo(Loan otherLoan) {
+        return dueDate.compareTo(otherLoan.getDueDate());
     }
 }
