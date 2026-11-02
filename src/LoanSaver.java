@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
 public class LoanSaver {
     private final String delimiter = ",";
 
@@ -12,7 +13,6 @@ public class LoanSaver {
             for (Loan loan : loans) {
                 int memberId = loan.getBorrower().ID();
                 String isbn = ((Book) loan.getResource()).getISBN();
-
                 String line = memberId + delimiter +
                         isbn + delimiter +
                         loan.borrowDate + delimiter +

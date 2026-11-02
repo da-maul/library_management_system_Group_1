@@ -10,6 +10,8 @@ public class VideoGame extends Resource {
         this.studio = studio;
     }
 
+    public long getEAN() {return EAN;}
+    public String getStudio() {return studio;}
     public String getPlatform() {return platform;}
 
     @Override

@@ -15,13 +15,4 @@ public class MemberSaver {
         }
     }
   }
-    public void saveMovies(List<Movie> movies, String filename) throws IOException{
-        Path path = Path.of(filename);
-        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-            for (Movie movie : movies) {
-                writer.write(movie.getTitle() + delimiter + movie.getLengthInMinutes() + delimiter + movie.getDirector() + delimiter + movie.getCreator());
-                writer.newLine();
-            }
-        }
-    }
 }

@@ -16,7 +16,6 @@ public class LoanLoader {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(delimiter, -1);
-
                 if (fields.length >= 4) {
                     int memberId = Integer.parseInt(fields[0].trim());
                     int identifier = Integer.parseInt(fields[1].trim());
