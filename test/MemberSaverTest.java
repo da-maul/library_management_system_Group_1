@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LibrarySaverTest {
+public class MemberSaverTest {
     @Test
     void testSaveMembers() throws IOException {
 // Arrange
@@ -16,7 +16,7 @@ public class LibrarySaverTest {
                 new Member("Ian Bridgwood", 2222),
                 new Member("Jakob Kofoed Janot", 3333)
         );
-        var librarySaver = new LibrarySaver();
+        var librarySaver = new MemberSaver();
 // Act
         librarySaver.saveMembers(members, "test-members.csv");
 // Assert

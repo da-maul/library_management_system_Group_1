@@ -1,5 +1,6 @@
 
 void main() {
+    List<Resource> resources = new ArrayList<>();
 
     LoanPolicy loanPolicy = new StandardLoanPolicy();
     LoanPolicy bornholmRegel = new AudioBooksLoanPolicy();
@@ -29,7 +30,6 @@ void main() {
     //Test
 
 
-
     library.addResource(audioBook);
     library.addResource(book1); library.addResource(book2); library.addResource(book3);
 
@@ -40,20 +40,31 @@ void main() {
     library.addMember(joe); library.addMember(hugh); library.addMember(ben);
 
       //tilføj members til csv filen
-    LibrarySaver librarySaver = new LibrarySaver();
+    MemberSaver memberSaver = new MemberSaver();
     try {
-        librarySaver.saveMembers(library.getMembers(),"members.csv");
+        memberSaver.saveMembers(library.getMembers(),"members.csv");
     } catch (IOException e) {
         throw new RuntimeException(e);
     }
 
     //Load members fra csv filen
-    LibraryLoader libraryLoader = new LibraryLoader();
+    MemberLoader memberLoader = new MemberLoader();
+    List<Member> members;
     try {
-        libraryLoader.loadMembers("members.csv");
+        members = memberLoader.loadMembers("members.csv");
     } catch (IOException e) {
         throw new RuntimeException(e);
     }
+
+    for (Member member : members) {
+        library.addMember(member);
+    }
+
+    for (Resource resource : books) {
+        library.addResource();
+    }
+
+
 
 
     //Tests -------------------
