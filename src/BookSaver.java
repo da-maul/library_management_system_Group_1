@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
 public class BookSaver {
     private final String delimiter = ",";
 
@@ -13,7 +14,8 @@ public class BookSaver {
                 String line = book.getISBN() + delimiter +
                         book.getTitle() + delimiter +
                         book.getCreator() + delimiter +
-                        book.getPages();
+                        book.getPages() + delimiter +
+                        book.getIdentifier();
 
                 writer.write(line);
                 writer.newLine();

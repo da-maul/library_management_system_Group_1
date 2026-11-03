@@ -8,19 +8,22 @@ import java.util.List;
 public class AudioBookLoader {
     private final String delimiter = ",";
 
-    public List<AudioBook> loadAudioBooks(String filename) throws IOException {
-        Path path = Path.of(filename);
+    public List<AudioBook> loadAudiobooks(String filePatb) throws IOException {
+        Path path = Path.of(filePatb);
         List<AudioBook> audioBooks = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(delimiter, -1);
-                audioBooks.add(new AudioBook(
-                        fields[0],
-                        fields[1],
-                        Integer.parseInt(fields[2]),
-                        fields[3],
-                        Integer.parseInt(fields[4])));
+
+                if (fields.length >= 5) {
+                    String isbn = fields[0].trim();
+                    String title = fields[1].trim();
+                    String author = fields[2].trim();
+                    int durationMinutes = Integer.parseInt(fields[3].trim());
+                    int identifier = Integer.parseInt(fields[4].trim());
+                    audioBooks.add(new AudioBook(author, title, durationMinutes, isbn, identifier));
+                }
             }
         }
         return audioBooks;
