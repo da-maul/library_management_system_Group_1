@@ -12,6 +12,7 @@ public class Movie extends Resource {
 
     public String getDirector() {return director;}
     public int getLengthInMinutes() {return lengthInMinutes;}
+    public long getEAN() {return EAN;}
 
     @Override
     public boolean equals(Object maybeMovie) {
