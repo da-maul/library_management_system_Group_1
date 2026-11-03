@@ -8,6 +8,8 @@ void main() throws IOException {
 
     Library library = new Library(loanPolicy);
 
+    //TODO tilføj loansaver og loader
+
     if (Files.exists(Path.of("books.csv"))) {
         BookLoader bookLoader = new BookLoader();
         for (Book book : bookLoader.loadBooks("books.csv")) {
