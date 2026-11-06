@@ -7,17 +7,14 @@ import java.util.List;
 public class LoanSaver {
     private final String delimiter = ",";
 
-    public void saveLoans(List<Loan> loans, String filePath) throws IOException{
+    public void saveLoans(List<Loan> loans, String filePath) throws IOException {
         Path path = Path.of(filePath);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Loan loan : loans) {
-                int memberId = loan.getBorrower().ID();
-                String isbn = ((Book) loan.getResource()).getISBN();
-                String line = memberId + delimiter +
-                        isbn + delimiter +
+                String line = loan.getResource().getIdentifier() + delimiter +
+                        loan.getBorrower().ID() + delimiter +
                         loan.borrowDate + delimiter +
                         loan.getDueDate();
-
                 writer.write(line);
                 writer.newLine();
             }

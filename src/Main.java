@@ -70,6 +70,16 @@ void main() throws IOException {
         library.addMember(joe); library.addMember(hugh); library.addMember(ben);
     }
 
+    if (Files.exists(Path.of("loans.csv"))) {
+        LoanLoader loanLoader = new LoanLoader();
+        List<Loan> loans = loanLoader.loadLoans("loans.csv", library);
+        for (Loan loan : loans) {
+            int memberId = loan.getBorrower().ID();
+            int resourceId = Math.toIntExact(loan.getResource().getIdentifier());
+            library.loanIt(resourceId, memberId);
+        }
+    }
+
 
     //Tests -------------------
     IO.println("Standard-reglen:");
@@ -128,4 +138,5 @@ void main() throws IOException {
     new AudioBookSaver().saveAudioBooks(audioBooks, "audiobooks.csv");
     new VideoGameSaver().saveVideoGames(videoGames, "videogames.csv");
     new MovieSaver().saveMovies(movies, "movies.csv");
+    new LoanSaver().saveLoans(library.getLoans(), "loans.csv");
 }

@@ -9,23 +9,30 @@ import java.util.List;
 public class LoanLoader {
     private final String delimiter = ",";
 
-    public List<Loan> loadLoans(String filePatb) throws IOException {
-        Path path = Path.of(filePatb);
+    public List<Loan> loadLoans(String filePath, Library library) throws IOException {
+        Path path = Path.of(filePath);
         List<Loan> loans = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(delimiter, -1);
+
                 if (fields.length >= 4) {
-                    int memberId = Integer.parseInt(fields[0].trim());
-                    int identifier = Integer.parseInt(fields[1].trim());
-                    LocalDate borrowDate =  LocalDate.parse(fields[2].trim());
-                    LocalDate dueDate = LocalDate.parse(fields[3].trim());
+                    int resourceId = Integer.parseInt(fields[0].trim());
+                    int memberId = Integer.parseInt(fields[1].trim());
+                    LocalDate borrowDate = LocalDate.parse(fields[2].trim());
+                        LocalDate dueDate = LocalDate.parse(fields[3].trim());
 
-                    Member borrower = new Member("", memberId);
-                    Resource resource = new Book("", "", "", 0, identifier);
+                    Resource resource = library.getResource(resourceId);
+                    Member borrower = library.getMember(memberId);
 
-                    loans.add(new Loan(resource, borrower, borrowDate, dueDate));
+
+                    // Ensure both resource and borrower exist before adding the loan
+                    if (resource != null && borrower != null) {
+                        loans.add(new Loan(resource, borrower, borrowDate, dueDate));
+                    } else {
+                        IO.println("Error loading loan: Resource or borrower not found.");
+                    }
                 }
             }
         }
