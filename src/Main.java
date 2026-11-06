@@ -9,6 +9,13 @@ void main() throws IOException {
     Library library = new Library(loanPolicy);
 
     //TODO tilføj loansaver og loader
+    if (Files.exists(Path.of("Loans.csv")));
+        LoanLoader loanLoader = new LoanLoader();
+
+
+
+
+
 
     if (Files.exists(Path.of("books.csv"))) {
         BookLoader bookLoader = new BookLoader();
