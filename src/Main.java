@@ -9,6 +9,13 @@ void main() throws IOException {
     Library library = new Library(loanPolicy);
 
     //TODO tilføj loansaver og loader
+    if (Files.exists(Path.of("Loans.csv")));
+        LoanLoader loanLoader = new LoanLoader();
+
+
+
+
+
 
     if (Files.exists(Path.of("books.csv"))) {
         BookLoader bookLoader = new BookLoader();
@@ -61,6 +68,16 @@ void main() throws IOException {
         Member hugh = new Member("Hugh Janus", 6969);
         Member ben = new Member("Ben Dover", 8008);
         library.addMember(joe); library.addMember(hugh); library.addMember(ben);
+    }
+
+    if (Files.exists(Path.of("loans.csv"))) {
+        LoanLoader loanLoader = new LoanLoader();
+        List<Loan> loans = loanLoader.loadLoans("loans.csv", library);
+        for (Loan loan : loans) {
+            int memberId = loan.getBorrower().ID();
+            int resourceId = Math.toIntExact(loan.getResource().getIdentifier());
+            library.loanIt(resourceId, memberId);
+        }
     }
 
 
@@ -121,4 +138,5 @@ void main() throws IOException {
     new AudioBookSaver().saveAudioBooks(audioBooks, "audiobooks.csv");
     new VideoGameSaver().saveVideoGames(videoGames, "videogames.csv");
     new MovieSaver().saveMovies(movies, "movies.csv");
+    new LoanSaver().saveLoans(library.getLoans(), "loans.csv");
 }
